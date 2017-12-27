@@ -2,9 +2,17 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 
-const PrivateRoute = inject("authStore")(observer(({ authStore, ...rest }) => {
-  if (authStore.isLogin) {
-    return (<Route {...rest} />)
+import stores from '../stores'
+
+const PrivateRoute = observer(({ ...args }) => {
+
+  console.log("PrivateRoute args = ", args)
+
+  let isLogin = stores.authStore.isLogin
+  console.log("PrivateRoute isLogin = ", isLogin)
+
+  if (isLogin) {
+    return (<Route {...args} />)
   } else {
     return (
       <Redirect to={{ pathname: '/login' }} />
@@ -16,6 +24,6 @@ const PrivateRoute = inject("authStore")(observer(({ authStore, ...rest }) => {
       // )} />
     )
   }
-}))
+})
 
 export default PrivateRoute

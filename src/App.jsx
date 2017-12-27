@@ -4,14 +4,10 @@ import { Provider } from 'mobx-react'
 import { RouterStore, syncHistoryWithStore } from 'mobx-react-router'
 import createHashHistory from 'history/createHashHistory'
 import createBrowserHistory from 'history/createBrowserHistory'
-import stores from './stores'
-import { loginPage, homePage } from './pages'
-import { PrivateRoute, PublicRoute } from "./containers";
-// import Login from './containers/Login'
-// import Dashboard from './containers/Dashboard';
-// import PrivateRoute from './containers/PrivateRoute'
-// import PublicRoute from './containers/PublicRoute';
 
+import stores from './stores'
+import { PrivateRoute, PublicRoute } from "./containers";
+import { loginPage, homePage, aboutPage } from './pages'
 
 const hashHistory = createBrowserHistory();
 // const hashHistory = createHashHistory();
@@ -35,7 +31,8 @@ class App extends Component {
         <Router history={history}>
           <Switch>
             <PublicRoute exact path='/login' component={loginPage} />
-            <PrivateRoute path='/' component={homePage} />
+            <PrivateRoute exact path='/' component={homePage} />
+            <PrivateRoute path='/about' component={aboutPage} />
           </Switch>
         </Router>
       </Provider>
