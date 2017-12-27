@@ -2,8 +2,10 @@ import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 import { observer, inject } from 'mobx-react'
 
-const PublicRoute = inject("authStore")(observer(({ authStore, ...rest }) => {
-  if (!authStore.isLogin) {
+import stores from '../stores'
+
+const PublicRoute = observer(({ ...rest }) => {
+  if (!stores.authStore.isLogin) {
     return (<Route {...rest} />)
   } else {
     return (
@@ -16,6 +18,6 @@ const PublicRoute = inject("authStore")(observer(({ authStore, ...rest }) => {
       // )} />
     )
   }
-}))
+})
 
 export default PublicRoute
