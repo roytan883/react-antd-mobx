@@ -1,11 +1,12 @@
 {
-  "name": "react-template",
+  "name": "react-antd-mobx",
   "version": "0.1.0",
+  "description": "react-antd-mobx",
+  "author": "roytan883",
   "private": true,
-  "main": "./src/main/main.js",
   "dependencies": {
     "antd": "3.0.3",
-    "electron": "1.8.1",
+    "is-electron-renderer": "^2.0.1",
     "mobx": "3.4.1",
     "mobx-react": "4.3.5",
     "mobx-react-router": "4.0.1",
@@ -19,12 +20,32 @@
   },
   "scripts": {
     "server": "react-app-rewired start",
+    "build": "yarn build-render && yarn build-main && node ./modifyHtml.js",
+    "build-main": "node ./node_modules/webpack/bin/webpack --config ./config-main.js --progress --profile --colors",
     "build-render": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject",
-    "build-main": "cross-env NODE_ENV=production node ./node_modules/webpack/bin/webpack --config ./config-main.js --progress --profile --colors",
+    "pack": "electron-builder --dir --win",
+    "dist": "electron-builder --win",
     "client": "cross-env HOT=1 NODE_ENV=development ./node_modules/.bin/electron ./src/main/main.js",
     "dev": "concurrently --kill-others \"yarn run server\" \"wait-on -d 15000 -t 20000 http://localhost:3000 && yarn run client\""
+  },
+  "build": {
+    "productName": "react-antd-mobx",
+    "appId": "github.roytan883.ram",
+    "artifactName": "${productName}-${version}-${os}-${arch}.${ext}",
+    "win": {
+      "target": "nsis"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "${productName}-${version}-${os}-${arch}-setup.${ext}",
+      "deleteAppDataOnUninstall": true
+    },
+    "directories": {
+      "app": "./build"
+    }
   },
   "devDependencies": {
     "babel-plugin-import": "1.6.3",
@@ -32,6 +53,7 @@
     "babel-register": "6.26.0",
     "concurrently": "^3.5.1",
     "cross-env": "5.1.3",
+    "electron": "1.8.1",
     "electron-builder": "19.49.2",
     "electron-updater": "2.17.6",
     "react-app-rewire-eslint": "0.2.3",
