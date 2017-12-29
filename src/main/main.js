@@ -8,8 +8,8 @@ const fs = require('fs')
 let mainWindow = null
 
 console.log("[main] __dirname = ", __dirname)
-console.log("[main] readdirSync __dirname = ", fs.readdirSync(__dirname))
-console.log("[main] readdirSync __dirname = ", fs.readdirSync(__dirname + '/static/media'))
+// console.log("[main] readdirSync __dirname = ", fs.readdirSync(__dirname))
+// console.log("[main] readdirSync __dirname = ", fs.readdirSync(__dirname + '/static/media'))
 
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:3000/`
