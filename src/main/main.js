@@ -11,6 +11,10 @@ console.log("[main] __dirname = ", __dirname)
 // console.log("[main] readdirSync __dirname = ", fs.readdirSync(__dirname))
 // console.log("[main] readdirSync __dirname = ", fs.readdirSync(__dirname + '/static/media'))
 
+app.__static = __dirname
+
+console.log("[main] app.__MyDirName = ", app.__MyDirName)
+
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:3000/`
   // : `file://index.html`;

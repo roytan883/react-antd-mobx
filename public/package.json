@@ -3,5 +3,6 @@
   "version": "0.1.0",
   "description": "react-antd-mobx",
   "author": "roytan883",
-  "main": "main.js"
+  "main": "main.js",
+  "homepage": "."
 }
