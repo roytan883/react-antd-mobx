@@ -1,6 +1,10 @@
 import moment from 'moment';
 
-const isDev = process.env.NODE_ENV === 'development' ? true : false
+const _isDev = process.env.NODE_ENV === 'development' ? true : false
+
+export function isDev() {
+  return _isDev
+}
 
 export function initStaticPath() {
   if (window.require && window.require('electron')) {
@@ -10,7 +14,7 @@ export function initStaticPath() {
 }
 
 export function getStaticPath(val) {
-  if (isDev) {
+  if (_isDev) {
     return val
   } else {
     return window.require ? window.__static + val : val

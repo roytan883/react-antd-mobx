@@ -3,6 +3,8 @@ const path = require('path')
 const url = require('url')
 const fs = require('fs')
 
+const _isDev = process.env.NODE_ENV === 'development' ? true : false
+
 // 保持一个对于 window 对象的全局引用，如果你不这样做，
 // 当 JavaScript 对象被垃圾回收， window 会被自动地关闭
 let mainWindow = null
@@ -15,10 +17,13 @@ app.__static = __dirname
 
 console.log("[main] app.__MyDirName = ", app.__MyDirName)
 
-const winURL = process.env.NODE_ENV === 'development'
-  ? `http://localhost:3000/`
-  // : `file://index.html`;
-  : `file://${__dirname}/index.html`;
+// const winURL = process.env.NODE_ENV === 'development'
+//   ? `http://localhost:3000/`
+//   // : `file://index.html`;
+//   : `file://${__dirname}/index.html`;
+
+const winURL = _isDev ? `http://localhost:3000/` : `file://${__dirname}/index.html`;
+
 
 console.log("[main] winURL = ", winURL)
 
@@ -45,7 +50,9 @@ function createWindow() {
   mainWindow.loadURL(winURL);
 
   // 打开开发者工具。
-  mainWindow.webContents.openDevTools()
+  if (_isDev) {
+    mainWindow.webContents.openDevTools()
+  }
 
   // 当 window 被关闭，这个事件会被触发。
   mainWindow.on('closed', () => {

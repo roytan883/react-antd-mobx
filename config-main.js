@@ -14,11 +14,11 @@ const config = {
   },
   plugins: [
     // Minify the output
-    // new UglifyJSPlugin(),
+    new UglifyJSPlugin(),
     // NODE_ENV should be production so that modules do not perform certain development checks
-    // new webpack.DefinePlugin({
-    //   'process.env.NODE_ENV': JSON.stringify('production')
-    // }),
+    new webpack.DefinePlugin({
+      'process.env.NODE_ENV': JSON.stringify('production')
+    }),
   ],
   target: 'electron-main',
   node: {
